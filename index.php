@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ImgDrop</title>
+        <title>IMGDrop</title>
         <link rel="stylesheet" href="kickstart.css" />
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="kickstart.js"></script>
