@@ -15,6 +15,7 @@ if($_FILES["file"] != null) {
     if(substr($type, 0, 6) === "image/" && $size < 5000000) {
         $name = createFilename();
         if(!move_uploaded_file($tmp, "uploads/" . $name)){
+            echo json_encode(array("error" => "Error storing file, please try again"));
             http_response_code(500);
         } else {
             // Change last modified to now for the cron job
@@ -22,6 +23,7 @@ if($_FILES["file"] != null) {
             echo json_encode(array("name" => $name));
         }
     } else {
+        echo json_encode(array("error" => "Please check filesize and type of file"));
         http_response_code(400);
     }
 }
