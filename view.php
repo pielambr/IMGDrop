@@ -7,21 +7,23 @@
  */
 // Get key of image from URL
 $exists = false;
-if($_GET && key($_GET)){
+if(isset($_GET) && key($_GET)){
     $file = key($_GET);
-    if(file_exists("uploads/" . $file)){
+    if(file_exists("uploads/" . $file)
+        && strpos($file,'\\') === false
+        && strpos($file,'/') === false
+        && strpos($file,'.') === false){
         $image = glob("uploads/" . $file);
         $exists = true;
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>IMGDrop</title>
         <link rel="stylesheet" href="kickstart.css" />
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="kickstart.js"></script>
         <script type="text/javascript" src="imgdrop.js"></script>
     </head>
