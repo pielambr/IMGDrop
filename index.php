@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="kickstart.css" />
         <script type="text/javascript" src="imgdrop.js"></script>
     </head>
-    <body style="margin-top:30px">
-        <div class="wrapper wrapper-fixed">
+    <body>
+        <div style="margin-top:30px" class="wrapper wrapper-fixed">
             <h1>IMGDrop</h1>
             <div class="container container-red">
                 <header>
