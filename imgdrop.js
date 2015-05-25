@@ -62,11 +62,10 @@ var IMGDrop = {
     },
     upload: function (image) {
         var progress = this.progress;
-        if (!image) {
-            return;
+        var data = image ? new FormData() : new FormData(this.form);
+        if(image) {
+            data.append("file", image, "screenshot.png");
         }
-        var data = new FormData();
-        data.append("file", image, "screenshot.png");
         // Send file to the server
         var request = new XMLHttpRequest();
         request.open("POST", "upload.php");
@@ -97,7 +96,12 @@ var IMGDrop = {
         var that = this;
         this.progress = document.getElementById("progress");
         this.form = document.getElementById("file_form");
-        this.form.onsubmit = this.upload;
+        if(this.form){
+            this.form.onsubmit = function(ev) {
+                ev.preventDefault();
+                that.upload();
+            }
+        }
         document.addEventListener('paste', function (ev) {
             that.paste(ev);
         });
