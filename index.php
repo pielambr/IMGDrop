@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: Pieterjan Lambrecht
- * Date: 28/04/15
- * Time: 11:07
  */
 ?>
 <!DOCTYPE html>
@@ -11,8 +8,6 @@
     <head>
         <title>IMGDrop</title>
         <link rel="stylesheet" href="kickstart.css" />
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script type="text/javascript" src="kickstart.js"></script>
         <script type="text/javascript" src="imgdrop.js"></script>
     </head>
     <body style="margin-top:30px">
