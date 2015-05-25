@@ -11,6 +11,36 @@ window.onload = function () {
 };
 
 var IMGDrop = {
+    resetCrop: function() {
+        this.coords.x1 = 0;
+        this.coords.x2 = 0;
+        this.coords.y1 = 0;
+        this.coords.y2 = 0;
+        this.drawSelection();
+    },
+    applyCrop: function() {
+        if(Object.keys(this.coords).length === 0
+            || (this.coords.x1 === 0
+            && this.coords.x2 === 0
+            && this.coords.y1 === 0
+            && this.coords.y2 === 0)){
+            this.upload(this.image);
+            return;
+        } else {
+            var canvas = document.createElement("canvas");
+            var width = Math.abs(this.coords.x2 - this.coords.x1);
+            var height = Math.abs(this.coords.y2 - this.coords.y1);
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext("2d");
+            var image = document.getElementsByTagName("img")[0];
+            ctx.drawImage(image,
+                Math.min(this.coords.x1, this.coords.x2),
+                Math.min(this.coords.y1, this.coords.y2),
+                width, height, 0, 0, width, height);
+            this.upload(this.dataToBlob(canvas.toDataURL()));
+        }
+    },
     addCropMenu: function() {
         var that = this;
         var menu = document.createElement("div");
@@ -23,29 +53,14 @@ var IMGDrop = {
         apply.type = "submit";
         apply.value = "Apply";
         apply.onclick = function() {
-            var canvas = document.createElement("canvas");
-            var width = Math.abs(that.coords.x2 - that.coords.x1);
-            var height = Math.abs(that.coords.y2 - that.coords.y1);
-            canvas.width = width;
-            canvas.height = height;
-            var ctx = canvas.getContext("2d");
-            var image = document.getElementsByTagName("img")[0];
-            ctx.drawImage(image,
-                Math.min(that.coords.x1, that.coords.x2),
-                Math.min(that.coords.y1, that.coords.y2),
-                width, height, 0, 0, width, height);
-            canvas.toBlob(that.upload);
+            that.applyCrop();
         }
         var reset = document.createElement("input");
         reset.style.margin = "5px";
         reset.type = "submit";
         reset.value = "Reset";
-        reset.onclick = function() {
-            that.coords.x1 = 0;
-            that.coords.x2 = 0;
-            that.coords.y1 = 0;
-            that.coords.y2 = 0;
-            that.drawSelection()
+        reset.onclick = function(){
+            that.resetCrop();
         }
         menu.appendChild(apply);
         menu.appendChild(reset);
@@ -99,6 +114,12 @@ var IMGDrop = {
         }
         img.onmouseup = function (ev) {
             img.onmousemove = null;
+        }
+        document.onkeydown = function(ev) {
+            var key = ev.which || ev.keyCode;
+            if(key === 13) {
+                that.applyCrop();
+            }
         }
     },
     dataToBlob: function (dataURI) {
