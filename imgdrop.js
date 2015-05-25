@@ -29,6 +29,8 @@ var IMGDrop = {
         var that = this;
         this.regio = document.createElement("div");
         this.regio.setAttribute("contenteditable", "");
+        this.regio.setAttribute("position", "absolute");
+        this.regio.setAttribute("left", "-999px");
         this.regio.style.opacity = 0;
         document.body.appendChild(this.regio);
         this.regio.focus();
