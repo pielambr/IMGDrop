@@ -5,7 +5,6 @@
  * Date: 28/04/15
  * Time: 11:07
  */
-echo print_r($_FILES);
 if($_FILES["file"] != null) {
     // Extra information about the file
     $filename = $_FILES["file"]["name"];
