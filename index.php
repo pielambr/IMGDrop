@@ -8,7 +8,7 @@
     <head>
         <title>IMGDrop</title>
         <link rel="stylesheet" href="kickstart.css" />
-        <script type="text/javascript" src="imgdrop.js"></script>
+        <script type="text/javascript" src="imgdrop.min.js"></script>
     </head>
     <body>
         <div style="margin-top:30px" class="wrapper wrapper-fixed">

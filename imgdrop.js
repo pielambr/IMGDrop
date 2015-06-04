@@ -103,11 +103,11 @@ var IMGDrop = {
         this.can_upload = false;
         var img = document.getElementsByTagName("img")[0];
         img.onmousedown = function(ev) {
-            that.coords.x1 = ev.clientX;
-            that.coords.y1 = ev.clientY;
+            that.coords.x1 = window.pageXOffset + ev.clientX;
+            that.coords.y1 = window.pageYOffset + ev.clientY;
             img.onmousemove = function (ev) {
-                that.coords.x2 = ev.clientX;
-                that.coords.y2 = ev.clientY;
+                that.coords.x2 = window.pageXOffset + ev.clientX;
+                that.coords.y2 = window.pageYOffset + ev.clientY;
                 that.drawSelection();
             }
             return false;
